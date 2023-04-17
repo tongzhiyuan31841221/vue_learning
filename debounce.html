@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <input type="search" placeholder="请输入">
+        <button>提交</button>
+    </body>
+    <script>
+        let input = document.querySelector("input")
+        let btn = document.querySelector("button")
+        // 最基础的方式实现防抖
+        function debounce(callback, ...arg) {//...arg有作用域的感觉
+
+            let timer = null
+            console.log("debounce", ...arg, this)//你要知道这里不是真正的事件处理函数，返回值才是
+            //一上来你会发现这句话已经被执行，
+            // 而作为返回值的这个函数，因为我们还没有触发，
+            // 所以没有被调用
+            return function (e) {//如果你这里也写个...arg，你下面你在用的话，会直接用这个新的
+                console.log("debounce执行所返回的函数", e, ...arg, this)
+                // 这里不需要传参，因为触发事件时window会帮我们调用这个函数相当于放了一个submit
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    
+                    callback.apply(this, [e, arg])//apply是传一个数组
+
+                }, 1000)
+            }
+        }
+        function submit(...arg) {
+            // console.log(e)
+            // 前面的只是让多次触发，只保留最后一次，submit是计算，所以一定要拿到原来写的参数e,1, 2, 3, 4和button就是this
+            console.log("已经提交数据", this)
+            console.log(1)
+            console.log(arg)
+        }
+        // btn.addEventListener("click",submit)//那你这样子调用this肯定是btn
+        btn.addEventListener("click", debounce(submit, 1, 2, 3, 4))
+
+    </script>
+
+</html>

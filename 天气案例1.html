@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    *{
+        margin:20px;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>今天天气 {{state}}</h1>
+        <h1>今天天气 {{truefeel}}</h1>
+        <button @click="change">点击变换天气和随机心情</button><br>
+        <span >{{mood}}</span><br>
+        <button @click="test1">点我让mood[0]+1</button><br>
+        <span >{{truefeel}}</span>
+        <button @click="test2">点我让truefeel+1</button><br>
+        <span >{{obj.b.c}}</span>
+        <button @click="test3">obj.b.c+1</button><br>
+
+    </div>    
+</body>
+<script>
+    // 通过计算属性来完成
+    let vm = new Vue({
+        el: ".container",
+        data: {
+            weather: true,
+            state: "",
+            mood: [123, "sad", "normal"],
+            truefeel: 123,
+            obj:{
+                a:12,
+                b:{
+                    c:3
+                }
+            }
+        },
+        methods: {
+            change() {
+
+                // console.log(this);//对象并不可以形成一个作用域
+                this.weather = !this.weather//你是不可以直接看到vm的属性的，一定要this
+                this.truefeel = this.mood[Math.floor(Math.random() * 3)]
+
+            },
+            test1(){
+                console.log(this.mood[0]);
+                this.mood[0]+=1
+            },
+            test2(){
+                this.truefeel++
+                console.log(this.truefeel)
+            },
+            test3(){
+                this.obj.b.c++
+                console.log(this.obj.a)
+            }
+        },
+        computed: {
+            // state(){
+            //     //直接用简写因为反正我也不让用户改
+            //     if(this.weather)return "sunny"
+            //     else return "rainny"
+            // }
+        },
+        // 通过监视来判断
+        watch: {
+            "weather": {
+                immediate: true, //初始化时让handler调用一下
+                //handler什么时候调用？当isHot发生改变时。
+                handler(nv, oldV) {
+                    console.log('weather被修改了', nv, oldV)
+                    if (nv) this.state = "sunny"
+                    else this.state = "rainny"
+
+                }
+            },
+            // 演示深度监视
+            mood: {
+                handler(nv, ov) {
+                    console.log("mood变化了", this.mood)
+                }
+            },
+            truefeel:{
+                handler(nv,ov){
+                    console.log("truefeel变化了", this.truefeel)
+
+                }
+            },
+            "obj":{
+                deep:true,
+                handler(nv,ov){
+                    console.log("obj变化了", nv,ov)
+                    // 子层级变了，但你检测父级的话watch么有反应
+                    // 这时你就可以开启深度监视
+                }
+            }
+        }
+    })
+
+</script>
+
+</html>

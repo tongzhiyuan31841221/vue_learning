@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/dayjs.min.js"></script>
+    <style>
+        *{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>当前时间:{{Date.now() |timeformat4}} </span><br>
+        <button >点击显示当前时间</button><br>
+        <button >点击显示当前时间</button>
+    </div>
+</body>
+demo\package.json
+<script>
+    new Vue({
+        el:".box",
+        data:{
+            date:""
+        },
+        filters:{
+            timeformat4(value){
+                return dayjs(value).format('DD/MM/YYYY')
+            }
+        }
+        
+    })
+    dayjs("12-25-1995", "MM-DD-YYYY")
+    dayjs('2019-01-25').format('DD/MM/YYYY')
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟实现Vue的数据监测</title>
+</head>
+
+<body>
+    <script>
+// 自己数据劫持的实现
+        function Observer(obj) {
+            let keys = Object.keys(obj)
+            let res = {}
+            for (value of keys) {
+                if (obj[value] instanceof Object) {
+                    Object.defineProperty(res, value, {
+                        get() {
+                            console.log(`${value}已经被查看`)
+                            return Observer(obj[value])
+                        },
+                        set(value) {
+                            console.log(`${value}已经被修改`)
+                            (Observer(obj[value])) = value
+                        }
+                    })
+                } else {
+                    getSet(obj, res, value)
+                }
+            }
+            return res
+        }
+        function getSet(old, fresh, shuxing) {
+            Object.defineProperty(fresh, shuxing, {
+                get() {
+                    console.log(`${shuxing}已经被查看`)
+                    return old[shuxing]
+                },
+                set(value) {
+                    console.log(`${shuxing}已经被修改`)
+                    old[shuxing] = value
+                }
+            })
+        }
+        let obj = {
+            menpai: "七秀",
+            renwu: {
+                id: "001",
+                name:{
+                    zhenming:"gaojiangting",
+                    minghao:"qinmo"
+                }
+            }
+        }
+        let obj1 = {}
+
+        let res = Observer(obj)
+    </script>
+</body>
+
+</html>

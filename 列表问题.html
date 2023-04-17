@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        input,
+        li {
+            width: 200px;
+            height: 30px;
+            margin-top: 10px;
+            border: 2px solid skyblue;
+            border-radius: 10px;
+            padding-left: 50px;
+            line-height: 30px;
+        }
+    </style>
+    <script src="js/vue.js"></script>
+</head>
+</head>
+
+<body>
+    <div class="container">
+        <button @click="change">点击改变高绛婷name</button><br>
+        <input type="text" v-model="keyword">
+        <ul v-for="(val,i) in users" :key="val.id">
+            <li>{{val.name}} </li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    let vm = new Vue({
+        el: ".container",
+        data: {
+            keyword: "",
+            users: [
+                
+                { menpai: "七秀", id: "002", name: "叶芷青" },
+                { menpai: "七秀", id: "003", name: "小七" },
+                { menpai: "万花", id: "004", name: "万花" },
+                { menpai: "藏剑", id: "005", name: "叶琦菲" },
+                { menpai: "藏剑", id: "006", name: "叶英" },
+                { menpai: "江湖", id: "007", name: "王遗风" },
+                { menpai: "五毒", id: "008", name: "阿幼朵" },
+                { menpai: "江湖", id: "009", name: "剑圣" },
+                { menpai: "五毒", id: "010", name: "曲云" },
+            ],
+            filUser: []
+
+
+        },
+        methods: {
+            change() {
+                console.log(123);
+                // this.users.push({ menpai: "纯阳", name: "于睿", id: "011" })
+                // this.users.shift()
+                this.users[0]={menpai: "纯阳", name: "于睿", id: "011"}
+            }
+        },
+        // #region
+        // computed:{
+        //     filUsers(){
+        //         return this.users.filter((val)=>{
+        //             return val.menpai.includes(this.keyword)
+        //         })
+        //     }
+        // }
+        // #endregion
+        watch: {
+            keyword: {
+                immediate: true,
+                handler(val) {
+                    this.filUser = this.users.filter((val) => {
+                        return val.menpai.includes(this.keyword)
+                    })
+
+                }
+            }
+        }
+    })
+</script>
+
+</html>

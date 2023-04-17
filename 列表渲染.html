@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            width: 200px;
+            height: 30px;
+            margin-top: 10px;
+            border: 2px solid skyblue;
+            border-radius: 10px;
+            padding-left: 50px;
+            line-height: 30px;
+        }
+    </style>
+    <script src="js/vue.js"></script>
+</head>
+</head>
+
+<body>
+    <div class="container">
+        <ul v-for="(val,i) in user" :key="val.id">
+            <li>{{val.name}} {{i}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    new Vue({
+        el: ".container",
+        data: {
+            user: [
+                { id:"001",name: "高绛婷" },
+                { id:"002",name: "叶芷青" },
+                { id:"003",name: "小七" },
+                { id:"004",name: "万花" },]
+        }
+    })
+</script>
+
+</html>

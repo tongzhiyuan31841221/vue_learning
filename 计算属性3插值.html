@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            margin: 20px;
+        }
+    </style>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        姓 <input value="zhang" type="text" v-model=xing><br>
+        名 <input value="san" type="text" v-model=ming><br>
+        全名<span>{{quan()}}</span>  这种函数的方法应该放到method中好一点，因为这个函数没有必要数据绑定
+        <!-- 全名<span>{{xing}}-{{ming}}</span> -->
+    </div>
+</body>
+<script>
+
+    let vm = new Vue({
+        el: ".container",
+        data: {
+            xing: "zhang",
+            ming: "san",
+        },
+        computed:{
+          quan:{
+            get(){
+                return  this.name + '-' + this.ming
+            },
+            set(){
+                quan=value
+            }
+          }  
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <input type="search" placeholder="请输入">
+        <button>提交</button>
+    </body>
+    <script>
+        let input = document.querySelector("input")
+        let btn = document.querySelector("button")
+        function debounce(callback, ...arg) {
+            let timer = null
+            return function (e) {
+                console.log("debounce执行所返回的函数", this,arg)
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    callback()
+                    callback.apply(this,[e,...arg])
+                }, 1000)
+            }
+        }
+        function submit(...arg) {
+            console.log("已经提交数据", this,arg)
+        }
+        // btn.addEventListener("click",submit)//那你这样子调用this肯定是btn
+        btn.addEventListener("click", debounce(submit, 1, 2, 3, 4))
+
+    </script>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .box {
+            margin: 0 auto;
+            width: 800px;
+        }
+
+        .container {
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+            height: 100px;
+            border: 5px solid pink;
+            border-radius: 30px;
+        }
+    </style>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="container">
+
+            <a href="http://www.baidu.com" v-on:click.stop="show1">阻止默认行为</a>
+        </div>
+        <div class="container" @click="show2">
+            <li @click.stop="show2" style="width:200px;height:50px;list-style:none;background:skyblue">阻止事件冒泡</li>
+        </div>
+        <div class="container">
+            <a href="#" @click.once="show3">只能执行一次</a>
+        </div>
+        <div @click.capture="show4(1)" class="container">
+            <li @click="show4(2)" style="width:200px;height:50px;list-style:none;background:skyblue">事件捕获阶段</li>
+
+        </div>
+        <div class="container" @click.self="show5">
+            <a href="#" @click="show5">只有自己才行</a>
+        </div>
+        <div class="container">
+            <a href="#">默认行为立即执行</a>
+        </div>
+
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: ".box",
+        data: {
+            name: "zhangsan",
+            age: 123
+        },
+        methods: {
+            show1() {
+                // e.preventDefault()
+                console.log("阻止默认行为");
+            },
+            show2(e) {
+                // e.stopPropagation()
+                console.log("阻止事件冒泡行为");
+            }, 
+            show3() {
+                console.log("只执行一次行为");
+            }, 
+            show4(a ) {
+                console.log("事件捕获模式",a);
+            }, 
+            show5() {
+                console.log("target是自己时才执行");
+            }, 
+            show6() {
+                console.log("默认行为立即执行");
+            }
+        }
+    })
+</script>
+
+</html>

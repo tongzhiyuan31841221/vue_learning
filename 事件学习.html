@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            border: 2px solid pink
+        }
+
+        #btn {
+            width: 100px;
+            height: 30px;
+            margin-top: 20px;
+            border-radius: 20%;
+            background: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <button id="btn"v-on:click="welcome($event,12,13)">点击显示欢迎{{name}}</button>
+        <button id="btn"@click="welcome($event,12,13)">点击显示欢迎2{{name}}</button>
+        <!-- 这个东西就是个语法糖，参数方面完全一样，没有区别 -->
+        <!-- <button id="btn"v-on:click="welcome(12),你这样就把事件对象搞丢了">点击显示欢迎{{name}}</button> -->
+
+    </div>
+
+</body>
+<script>
+    let vm = new Vue({
+        el: ".container",
+        data: {
+            name: "zhangsan ",
+            age: 123
+        },
+        methods:{
+            welcome(e,...arg){
+                let [a,b]=arg
+                console.log(e);
+                console.log(a);
+                console.log(b);
+            }
+        }
+    })
+</script>
+
+</html>

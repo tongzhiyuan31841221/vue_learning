@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<!-- v-model:针对属性处理最起码要有value属性 -->
+
+<body>
+    
+    </div>
+</body>
+<script>
+  
+    class Person{
+        #name
+        #age
+        constructor(name,age)
+        {
+            // this.name=name;
+            // this.age=age;
+            this.#name=name;
+            this.#age=age;
+        }
+        get name(){
+            return this.#name
+        }
+    }
+
+    let p=new Person("zhangsan",123)
+
+</script>
+
+</html>

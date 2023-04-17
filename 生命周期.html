@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="box">
+        {{n}}
+        <button @click="change">点击n++</button>
+    </div>
+</body>
+<script>
+    let vm=new Vue({
+        el:".box",
+        data:{
+            n:10
+
+        },
+        methods:{
+            change(){
+                n++
+                console.log("change调用")
+            }
+        },
+        beforeCreate(){
+            console.log("beforeCreate")
+           
+            // 在这个阶段连vm实例都没有出来，数据代理也没有，data，methods都没有
+        }
+        ,
+        created(){
+            console.log("created")
+            // 这个时间数据代理确实做完了,
+            debugger
+        }
+        // 这个时间以后先看你有没有定义元素，在判断你有没有定义模板
+        ,beforeMount(){
+            console.log("beforeMount")
+            
+        }
+    })
+</script>
+</html>

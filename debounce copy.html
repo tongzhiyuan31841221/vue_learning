@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <input type="search" placeholder="请输入">
+    </body>
+    <script>
+        let input = document.querySelector("input")
+        // 最基础的方式实现防抖
+
+        function debounce(fn, delay) {
+            let that = this // 获取上下文
+            let timer = null // 利用闭包，避免污染
+            return function () {
+                let args = arguments // 获取当前参数
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    fn.apply(that, args)
+                }, delay)
+            }
+        }
+
+        let _debounce = debounce(() => {
+            console.log(input.value);
+        }, 1000)
+        input.addEventListener('input', function () {
+            _debounce()
+        })
+        
+
+</html >

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    * {
+        margin: 20px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>今天天气 {{state}}</h1>
+        <button @click="change">点击变换天气</button><br>
+    </div>
+</body>
+<script>
+    // 通过计算属性来完成
+    let vm = new Vue({
+        el: ".container",
+        data: {
+            weather: true,
+            state:""
+        },
+        methods: {
+            change() {
+                // console.log(this);//对象并不可以形成一个作用域
+                this.weather = !this.weather//你是不可以直接看到vm的属性的，一定要this
+            },
+
+        },
+        computed: {
+            // state(){
+            //     //直接用简写因为反正我也不让用户改
+            //     if(this.weather)return "sunny"
+            //     else return "rainny"
+            // }
+        },
+        // 通过监视来判断
+        watch: {
+            "weather": {
+                immediate: true, //初始化时让handler调用一下
+                //handler什么时候调用？当isHot发生改变时。
+                handler(nv, oldV) {
+                    setTimeout(() => {
+                        if (nv) this.state = "sunny"
+                        else this.state = "rainny"
+                    }, 2000);
+
+                }
+            },
+        }
+    })
+
+</script>
+
+</html>

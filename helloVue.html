@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>你好，开始学习Vue吧！！{{name}}{{good}}</h1>
+    </div>
+</body>
+<!-- 
+    {{}}差值语法，可以将Vue实例的对应容器的data放到页面里
+     以后就一般是函数，容器和Vue实例只可以一对一，多对一，一对多都是不行的
+    {{1+1}}，这里边一定放的是js表达式
+    老版本Vue调试工具data不支持中文
+ -->
+<script>
+    // 首先先来个全局配置
+    Vue.config.productionTip = false;
+    new Vue({
+        el: "#root",//element这里可以使用api来直接获取元素，一般还是选择器
+        data: {
+            name: "张三123",
+            good: "666"
+        }
+    })  
+</script>
+
+</html>

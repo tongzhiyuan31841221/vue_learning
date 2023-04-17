@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            padding-left: 30px;
+        }
+
+        input {
+            margin: 10px;
+
+            line-height: 30px;
+        }
+    </style>
+</head>
+<script src="js/vue.js"></script>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div class="form-control">
+                <label for="userName">账号</label>
+                <input v-model="msg.userName" type="text" id="userName"><br>
+                <label for="password">密码</label>
+                <input v-model="msg.password" type="password" id="password">
+            </div>
+            <div class="form-control">
+                男 <input v-model="msg.sex" value="male" name="sex" type="radio">
+                女 <input v-model="msg.sex" value="female" name="sex" type="radio">
+            </div>
+            <div class="form-control">
+                爱好<br>
+                吃饭 <input v-model="msg.hobby" value="eat" type="checkbox">
+                睡觉 <input v-model="msg.hobby" value="sleep" type="checkbox">
+                学习 <input v-model="msg.hobby" value="study" type="checkbox">
+            </div>
+
+            <select v-model="msg.city">
+                <option value="">请选择城市</option>
+                <option value="beijing">北京</option>
+                <option value="beijing">上海</option>
+                <option value="beijing">广州</option>
+                <option value="beijing">深圳</option>
+            </select><br>
+            <button type="submit">提交数据</button><br>
+            <input v-model="msg.agree" type="checkbox"> <a href="http://baidu.com">是否同意该协议</a><br>
+            <button>点击提交数据</button>
+        </form>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: ".container",
+        data: {
+           msg:{
+            userName: "",
+            password: "",
+            sex: ' value=""',
+            hobby: [],
+            city:'',
+            agree:''
+           }
+        },
+        methods: {
+
+        },
+    })
+</script>
+
+</html>
